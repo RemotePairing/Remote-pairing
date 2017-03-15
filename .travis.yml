@@ -6,7 +6,7 @@ solution: source/CodeMate.sln
 script:
   - dotnet restore
   - dotnet build
-  - dotnet test source/CodeMate.SampleLib.Tests
+  - dotnet test source/CodeMate.SampleLib.Tests/CodeMate.SampleLib.Tests.csproj
 
 notifications:
   email: false
