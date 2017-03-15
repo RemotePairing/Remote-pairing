@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMate.SampleLib", "CodeM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMate.SampleLib.Tests", "CodeMate.SampleLib.Tests\CodeMate.SampleLib.Tests.csproj", "{D76101DD-5EE1-4C28-841D-D17FC8E34B1F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D1610D0D-043E-4CF9-B7D8-9ABBE59E8868}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3302FBA2-5F11-4EA6-9FFD-B93ECDB2E1A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D763BA8A-4055-42E6-9A91-20A8D930A8CD} = {D1610D0D-043E-4CF9-B7D8-9ABBE59E8868}
+		{BD7F9971-3C01-4814-8F7E-2ECF50F04D61} = {D1610D0D-043E-4CF9-B7D8-9ABBE59E8868}
+		{D76101DD-5EE1-4C28-841D-D17FC8E34B1F} = {3302FBA2-5F11-4EA6-9FFD-B93ECDB2E1A5}
 	EndGlobalSection
 EndGlobal
