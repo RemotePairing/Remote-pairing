@@ -15,5 +15,11 @@
         {
             Assert.Equal(Multiplier.Multiply(2, 3), 6);
         }
+
+        [Fact]
+        public void ThreeoByThreeIsNine()
+        {
+            Assert.Equal(Multiplier.Multiply(3, 3), 9);
+        }
     }
 }
