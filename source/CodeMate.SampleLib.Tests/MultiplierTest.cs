@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CodeMate.SampleLib.Tests
+﻿namespace CodeMate.SampleLib.Tests
 {
     using Xunit;
 
@@ -13,9 +11,9 @@ namespace CodeMate.SampleLib.Tests
         }
 
         [Fact]
-        public void TwoByTwoIsSix()
+        public void TwoByThreeIsSix()
         {
-            Assert.Equal(Multiplier.Multiply(2, 2), 6);
+            Assert.Equal(Multiplier.Multiply(2, 3), 6);
         }
     }
 }

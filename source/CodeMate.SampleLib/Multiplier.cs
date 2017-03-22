@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CodeMate.SampleLib
+﻿namespace CodeMate.SampleLib
 {
     public class Multiplier
     {
