@@ -15,14 +15,14 @@ namespace CodeMate.WebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page1.";
+            ViewBag.Message = "Your application description page2.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page1.";
+            ViewBag.Message = "Your contact page2.";
 
             return View();
         }
