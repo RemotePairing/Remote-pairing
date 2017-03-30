@@ -15,7 +15,8 @@ namespace CodeMate.WebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page3.";
+
+            ViewBag.Message = "Your keys:" + GetSettings();
 
             return View();
         }
@@ -25,6 +26,17 @@ namespace CodeMate.WebApp.Controllers
             ViewBag.Message = "Great success!";
 
             return View();
+        }
+
+        public string GetSettings()
+        {
+            string res="";
+            var settings = System.Configuration.ConfigurationManager.AppSettings;
+            foreach (string key in settings)
+            {
+                res += $"key {key.ToString()} value: {settings[key]}\n";
+            }
+            return res;
         }
     }
 }
