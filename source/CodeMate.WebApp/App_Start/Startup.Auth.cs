@@ -51,7 +51,14 @@
             // This is similar to the RememberMe option when you log in.
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
-            app.UseGitHubAuthentication(GetSettings(GitHubClientIdName), GetSettings(GitHubSecretIdName));
+
+            app.UseGitHubAuthentication(
+                new GitHubAuthenticationOptions
+                {
+                    ClientId = GetSettings(GitHubClientIdName),
+                    ClientSecret = GetSettings(GitHubSecretIdName),
+                    Scope = { "user:email" }
+                });
         }
 
         public string GetSettings(string settingId)
