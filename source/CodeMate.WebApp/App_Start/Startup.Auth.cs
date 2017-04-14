@@ -55,13 +55,13 @@
             app.UseGitHubAuthentication(
                 new GitHubAuthenticationOptions
                 {
-                    ClientId = GetSettings(GitHubClientIdName),
-                    ClientSecret = GetSettings(GitHubSecretIdName),
-                    Scope = { "user:email" }
+                    ClientId = GetSetting(GitHubClientIdName),
+                    ClientSecret = GetSetting(GitHubSecretIdName),
+                    //Scope = { "user:email" }
                 });
         }
 
-        public string GetSettings(string settingId)
+        public string GetSetting(string settingId)
         {
             string res;
             var settings = ConfigurationManager.AppSettings;
