@@ -1,6 +1,7 @@
 ﻿namespace CodeMate.WebApp
 {
     using System;
+    using System.Collections.Generic;
     using System.Configuration;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -52,13 +53,15 @@
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
 
-            app.UseGitHubAuthentication(
-                new GitHubAuthenticationOptions
-                {
-                    ClientId = GetSetting(GitHubClientIdName),
-                    ClientSecret = GetSetting(GitHubSecretIdName),
-                    //Scope = { "user:email" }
-                });
+            var githubOptions = new GitHubAuthenticationOptions
+            {
+                ClientId = GetSetting(GitHubClientIdName),
+                ClientSecret = GetSetting(GitHubSecretIdName),
+            };
+            githubOptions.Scope.Clear();
+            githubOptions.Scope.Add("user:email");
+
+            app.UseGitHubAuthentication(githubOptions);
         }
 
         public string GetSetting(string settingId)
