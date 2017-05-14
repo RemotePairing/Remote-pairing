@@ -61,7 +61,7 @@
             githubOptions.Scope.Clear();
             githubOptions.Scope.Add("user:email");
 
-            app.UseGitHubAuthentication(githubOptions);
+            app.UseGitHubAuthentication("a","a");
         }
 
         public string GetSetting(string settingId)

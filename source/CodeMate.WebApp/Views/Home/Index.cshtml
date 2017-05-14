@@ -19,7 +19,7 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
@@ -28,13 +28,50 @@
                 },
                 defaultView: 'agendaWeek',
                 editable: true,
-                
+                events: '/Home/GetEvents/',
                 allDaySlot: false,
                 selectable: true,
-                slotMinutes: 15
+                slotMinutes: 15,
+                eventClick: function(calEvent, jsEvent, view) {
+                    alert('You clicked on event id: ' +
+                        calEvent.Id +
+                        "\nStart: " +
+                        calEvent.Start +
+                        "\nAnd the title is: " +
+                        calEvent.Title);
+                },
+                dayClick: function (date, allDay, jsEvent, view) {
+                    $('#eventTitle').val("");
+                    $('#eventDate').val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));
+                    $('#eventTime').val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
+                    ShowEventPopup(date);
+                },
+                select: function(start, end, jsEvent, view) {
+                    $('#eventTitle').val("kk12");
+                    $('#eventDate').val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
+                    $('#eventTime').val(moment(start, 'DD.MM.YYYY').format('HH:MM'));
+                    ShowEventPopup(date);
+                }
             });
         });
 
+        function ShowEventPopup(date) {
+            ClearPopupFormValues();
+            $('#popupEventForm').show();
+            $('#eventTitle').focus();
+        }
+
+        function ClearPopupFormValues() {
+            $('#eventID').val("");
+            $('#eventTitle').val("");
+            $('#eventDateTime').val("");
+            $('#eventDuration').val(""); 
+        }
+
+        $('#btnPopupCancel').click(function () {
+            ClearPopupFormValues();
+            $('#popupEventForm').hide();
+        });
     </script>
 }
 
@@ -42,3 +79,25 @@
 <div class="container">
     <div id="calendar"></div>
 </div>
+
+<div id="popupEventForm" class="modal" style="display: none;">
+    <div class="modal-header"><h3>Add new event</h3></div>
+    <div class="modal-body">
+        <form id="EventForm" class="well">
+            <input type="hidden" id="eventID">
+            <label>Event title</label>
+            <input type="text" id="eventTitle" placeholder="Title here"><br />
+            <label>Scheduled date</label>
+            <input type="text" id="eventDate"><br />
+            <label>Scheduled time</label>
+            <input type="text" id="eventTime"><br />
+            <label>Appointment length (minutes)</label>
+            <input type="text" id="eventDuration" placeholder="15"><br />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="btnPopupCancel" data-dismiss="modal" class="btn">Cancel</button>
+        <button type="button" id="btnPopupSave" data-dismiss="modal" class="btn btn-primary">Save event</button>
+    </div>
+</div>
+
