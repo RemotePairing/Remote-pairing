@@ -17,15 +17,25 @@
     <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
     <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/fullcalendar.min.js'></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function() {
+            var $modal = $('#myModal');
+
+            var $eventId = $('#eventID');
+            var $eventTitle = $('#eventTitle');
+            var $eventDate = $('#eventDate');
+            var $eventTime = $('#eventTime');
+            var $eventDuration = $('#eventDuration');
+
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev, next today',
                     center: 'title',
                     right: 'month, agendaWeek, agendaDay'
                 },
+                height: 'auto',
                 defaultView: 'agendaWeek',
                 editable: true,
                 events: '/Home/GetEvents/',
@@ -40,37 +50,44 @@
                         "\nAnd the title is: " +
                         calEvent.Title);
                 },
-                dayClick: function (date, allDay, jsEvent, view) {
-                    $('#eventTitle').val("");
-                    $('#eventDate').val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));
-                    $('#eventTime').val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
+                dayClick: function(date, allDay, jsEvent, view) {
+                    $eventTitle.val("");
+                    $eventDate.val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));
+                    $eventTime.val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
                     ShowEventPopup(date);
                 },
                 select: function(start, end, jsEvent, view) {
-                    $('#eventTitle').val("kk12");
-                    $('#eventDate').val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
-                    $('#eventTime').val(moment(start, 'DD.MM.YYYY').format('HH:MM'));
+                    $eventTitle.val("kk12");
+                    $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
+                    $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:MM'));
                     ShowEventPopup(date);
                 }
             });
-        });
 
-        function ShowEventPopup(date) {
-            ClearPopupFormValues();
-            $('#popupEventForm').show();
-            $('#eventTitle').focus();
-        }
+            function ClearPopupFormValues() {
+                $eventId.val("");
+                $eventTitle.val("");
+                $eventDate.val("");
+                $eventTime.val("");
+                $eventDuration.val("");
+            }
 
-        function ClearPopupFormValues() {
-            $('#eventID').val("");
-            $('#eventTitle').val("");
-            $('#eventDateTime').val("");
-            $('#eventDuration').val(""); 
-        }
+            function ShowEventPopup() {
+                $modal.modal('show');
+                ClearPopupFormValues();
+            }
 
-        $('#btnPopupCancel').click(function () {
-            ClearPopupFormValues();
-            $('#popupEventForm').hide();
+            $('#saveDate').click(function() {
+                // Todo save handler
+                var data = {
+                    title: $eventTitle.val(),
+                    date: $eventDate.val(),
+                    time: $eventTime.val(),
+                    duration: $eventDuration.val()
+                };
+                console.log(data);
+                alert('save triggered');
+            });
         });
     </script>
 }
@@ -78,26 +95,33 @@
 
 <div class="container">
     <div id="calendar"></div>
-</div>
 
-<div id="popupEventForm" class="modal" style="display: none;">
-    <div class="modal-header"><h3>Add new event</h3></div>
-    <div class="modal-body">
-        <form id="EventForm" class="well">
-            <input type="hidden" id="eventID">
-            <label>Event title</label>
-            <input type="text" id="eventTitle" placeholder="Title here"><br />
-            <label>Scheduled date</label>
-            <input type="text" id="eventDate"><br />
-            <label>Scheduled time</label>
-            <input type="text" id="eventTime"><br />
-            <label>Appointment length (minutes)</label>
-            <input type="text" id="eventDuration" placeholder="15"><br />
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" id="btnPopupCancel" data-dismiss="modal" class="btn">Cancel</button>
-        <button type="button" id="btnPopupSave" data-dismiss="modal" class="btn btn-primary">Save event</button>
-    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="EventForm" class="well">
+                        <input type="hidden" id="eventID">
+                        <label>Event title</label>
+                        <input type="text" id="eventTitle" placeholder="Title here"><br />
+                        <label>Scheduled date</label>
+                        <input type="text" id="eventDate"><br />
+                        <label>Scheduled time</label>
+                        <input type="text" id="eventTime"><br />
+                        <label>Appointment length (minutes)</label>
+                        <input type="text" id="eventDuration" placeholder="15"><br />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveDate">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 
