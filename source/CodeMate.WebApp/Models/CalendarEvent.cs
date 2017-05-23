@@ -5,14 +5,14 @@ using System.Web;
 
 namespace CodeMate.WebApp.Models
 {
+    [Serializable]
     public class CalendarEvent
     {
         public string Id { get; set; }
-        public string Title { get; set; }
-        public string Date { get; set; }
-        public string Start { get; set; }
-        public string End { get; set; }
-        public string Url { get; set; }
+        public string title { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
+        public string duration { get; set; }
         public bool AllDay { get; set; }
     }
 }

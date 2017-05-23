@@ -7,9 +7,21 @@ using System.Web.Mvc;
 namespace CodeMate.WebApp.Controllers
 {
     using Models;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
 
     public class HomeController : Controller
     {
+        private List<CalendarEvent> eventList;
+        private readonly string path = @"C:\temp\db.txt";
+        Random r = new Random();
+        public HomeController()
+        {
+            eventList = Deserialize();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -22,29 +34,88 @@ namespace CodeMate.WebApp.Controllers
 
             //Get the events
             //You may get from the repository also
-            var eventList = GetEvents();
+            var rows = Deserialize().ToArray();
 
-            var rows = eventList.ToArray();
             return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
-        private List<CalendarEvent> GetEvents()
+        private void Serialize(Object obj)
         {
-            var eventList = new List<CalendarEvent>();
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(path,
+                                     FileMode.Create,
+                                     FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, obj);
+            stream.Close();
+        }
 
-            for (int i = 1; i <= 2; i++)
+        private List<CalendarEvent> Deserialize()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(path,
+                                      FileMode.Open,
+                                      FileAccess.Read,
+                                      FileShare.Read);
+            List<CalendarEvent> obj = (List<CalendarEvent>)formatter.Deserialize(stream);
+            stream.Close();
+            return obj;
+        }
+
+        public bool AddEvent(string name, string startDate, string time, string duration)
+        {
+            try
             {
-                CalendarEvent newEvent = new CalendarEvent
+                int size = eventList.Count;
+                var dt = ParseDateAndTime(startDate, time);
+                eventList.Add(new CalendarEvent
                 {
-                    Id = i.ToString(),
-                    Title = $"Event {i}",
-                    Start = DateTime.Now.AddDays(i).AddMinutes(i*30).ToString("s"),
-                    End = DateTime.Now.AddDays(i).AddMinutes(i*30 + 30).ToString("s"),                    
+                    Id = r.Next(10000).ToString(),
+                    title = name,
+                    start = dt.ToString("s"),
+                    end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
+                    duration = duration,
                     AllDay = false
-                };
-                eventList.Add(newEvent);
+                });
+
+                Serialize(eventList);
             }
-            
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return true;
+        }
+
+        private DateTime ParseDateAndTime(string date, string time)
+        {
+            var res = DateTime.ParseExact(date + " " + time, "dd-mm-yyyy HH:MM", CultureInfo.InvariantCulture);
+            return res;
+        }
+
+        private List<CalendarEvent> InitEvents()
+        {
+            eventList = new List<CalendarEvent>();
+            CalendarEvent newEvent = new CalendarEvent
+            {
+                Id = 3.ToString(),
+                title = $"Event 0",
+                start = DateTime.UtcNow.AddDays(1).AddMinutes(30).ToString("s"),
+                end = DateTime.UtcNow.AddDays(1).AddMinutes(60).ToString("s"),                    
+                AllDay = false
+            };
+            eventList.Add(newEvent);
+
+            eventList.Add(new CalendarEvent
+            {
+                Id = 4.ToString(),
+                title = $"Event 1",
+                start = DateTime.UtcNow.AddDays(2).AddMinutes(30).ToString("s"),
+                end = DateTime.UtcNow.AddDays(2).AddMinutes(60).ToString("s"),
+                AllDay = false
+            });
+
             return eventList;
         }
 

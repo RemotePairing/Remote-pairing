@@ -38,7 +38,10 @@
                 height: 'auto',
                 defaultView: 'agendaWeek',
                 editable: true,
-                events: '/Home/GetEvents/',
+                events: {
+                    url: '/Home/GetEvents/',
+                    cache: true
+                },
                 allDaySlot: false,
                 selectable: true,
                 slotMinutes: 15,
@@ -50,17 +53,15 @@
                         "\nAnd the title is: " +
                         calEvent.Title);
                 },
-                dayClick: function(date, allDay, jsEvent, view) {
-                    $eventTitle.val("");
-                    $eventDate.val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));
-                    $eventTime.val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
-                    ShowEventPopup(date);
-                },
-                select: function(start, end, jsEvent, view) {
-                    $eventTitle.val("kk12");
+                //dayClick: function(date, jsEvent, view) {
+                //    $eventDate.val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));
+                //    $eventTime.val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
+                //    ShowEventPopup();
+                //},
+                select: function (start, end, jsEvent, view) {
                     $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
                     $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:MM'));
-                    ShowEventPopup(date);
+                    ShowEventPopup();
                 }
             });
 
@@ -74,19 +75,31 @@
 
             function ShowEventPopup() {
                 $modal.modal('show');
-                ClearPopupFormValues();
             }
 
             $('#saveDate').click(function() {
-                // Todo save handler
                 var data = {
-                    title: $eventTitle.val(),
-                    date: $eventDate.val(),
+                    name: $eventTitle.val(),
+                    startDate: $eventDate.val(),
                     time: $eventTime.val(),
                     duration: $eventDuration.val()
                 };
                 console.log(data);
-                alert('save triggered');
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/Home/AddEvent",
+                    data: data,
+                    success: function (response) {
+                        if (response == 'True') {
+                            $('#calendar').fullCalendar('refetchEvents');
+                        }
+                        else {
+                            alert('Error, could not save event!');
+                        }
+                    }
+                });
+                $modal.modal('hide');
             });
         });
     </script>
@@ -113,7 +126,7 @@
                         <label>Scheduled time</label>
                         <input type="text" id="eventTime"><br />
                         <label>Appointment length (minutes)</label>
-                        <input type="text" id="eventDuration" placeholder="15"><br />
+                        <input type="text" id="eventDuration" value="30"><br />
                     </form>
                 </div>
                 <div class="modal-footer">
