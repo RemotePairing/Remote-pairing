@@ -7,6 +7,7 @@ using System.Web.Mvc;
 namespace CodeMate.WebApp.Controllers
 {
     using Models;
+    using Repositories;
     using System.Globalization;
     using System.IO;
     using System.Runtime.Serialization;
@@ -14,13 +15,8 @@ namespace CodeMate.WebApp.Controllers
 
     public class HomeController : Controller
     {
-        private List<CalendarEvent> eventList;
-        private readonly string path = @"C:\temp\db.txt";
-        Random r = new Random();
-        public HomeController()
-        {
-            eventList = Deserialize();
-        }
+        private Random r = new Random();
+        private CalendarEventRepository calendarEventRepo = new CalendarEventRepository(); 
 
         public ActionResult Index()
         {
@@ -29,61 +25,26 @@ namespace CodeMate.WebApp.Controllers
 
         public ActionResult GetEvents(DateTime start, DateTime end)
         {
-            //var fromDate = ConvertFromUnixTimestamp(start);
-            //var toDate = ConvertFromUnixTimestamp(end);
-
-            //Get the events
-            //You may get from the repository also
-            var rows = Deserialize().ToArray();
-
+            var rows = calendarEventRepo.List.ToArray();
             return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
-        private void Serialize(Object obj)
-        {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(path,
-                                     FileMode.Create,
-                                     FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, obj);
-            stream.Close();
-        }
-
-        private List<CalendarEvent> Deserialize()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(path,
-                                      FileMode.Open,
-                                      FileAccess.Read,
-                                      FileShare.Read);
-            List<CalendarEvent> obj = (List<CalendarEvent>)formatter.Deserialize(stream);
-            stream.Close();
-            return obj;
-        }
 
         public bool AddEvent(string name, string startDate, string time, string duration)
         {
-            try
-            {
-                int size = eventList.Count;
-                var dt = ParseDateAndTime(startDate, time);
-                eventList.Add(new CalendarEvent
-                {
-                    Id = r.Next(10000).ToString(),
-                    title = name,
-                    start = dt.ToString("s"),
-                    end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
-                    duration = duration,
-                    AllDay = false
-                });
+            var dt = ParseDateAndTime(startDate, time);
 
-                Serialize(eventList);
-            }
-            catch (Exception ex)
+            var newCalendarEvent = new CalendarEvent
             {
+                Id = r.Next(10000).ToString(),
+                title = name,
+                start = dt.ToString("s"),
+                end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
+                duration = duration,
+                AllDay = false
+            };
 
-                throw;
-            }
+            calendarEventRepo.Add(newCalendarEvent);
 
             return true;
         }
@@ -92,37 +53,6 @@ namespace CodeMate.WebApp.Controllers
         {
             var res = DateTime.ParseExact(date + " " + time, "dd-mm-yyyy HH:MM", CultureInfo.InvariantCulture);
             return res;
-        }
-
-        private List<CalendarEvent> InitEvents()
-        {
-            eventList = new List<CalendarEvent>();
-            CalendarEvent newEvent = new CalendarEvent
-            {
-                Id = 3.ToString(),
-                title = $"Event 0",
-                start = DateTime.UtcNow.AddDays(1).AddMinutes(30).ToString("s"),
-                end = DateTime.UtcNow.AddDays(1).AddMinutes(60).ToString("s"),                    
-                AllDay = false
-            };
-            eventList.Add(newEvent);
-
-            eventList.Add(new CalendarEvent
-            {
-                Id = 4.ToString(),
-                title = $"Event 1",
-                start = DateTime.UtcNow.AddDays(2).AddMinutes(30).ToString("s"),
-                end = DateTime.UtcNow.AddDays(2).AddMinutes(60).ToString("s"),
-                AllDay = false
-            });
-
-            return eventList;
-        }
-
-        private static DateTime ConvertFromUnixTimestamp(double timestamp)
-        {
-            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return origin.AddSeconds(timestamp);
         }
 
         public ActionResult About()
