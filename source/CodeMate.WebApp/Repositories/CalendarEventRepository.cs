@@ -10,72 +10,41 @@ using System.Web;
 
 namespace CodeMate.WebApp.Repositories
 {
+    using System.Data.Entity.Migrations;
+    using DAL;
+
     public class CalendarEventRepository : IRepository<CalendarEvent>
     {
         private readonly string path = @"C:\temp\db.txt";
-        private IList<CalendarEvent> eventList;
+        private readonly CalendarDbContext _calendarDbContext;
 
         public CalendarEventRepository()
         {
-            Deserialize();
+            _calendarDbContext = new CalendarDbContext();
         }
 
-        public IEnumerable<CalendarEvent> List
-        {
-            get
-            {
-                Deserialize();
-                return eventList;
-            }
-        }
+        public IEnumerable<CalendarEvent> List => _calendarDbContext.CalendarEvents.AsEnumerable();
 
         public void Add(CalendarEvent entity)
         {
-            eventList.Add(entity);
-            Serialize(eventList);
+            _calendarDbContext.CalendarEvents.Add(entity);
+            _calendarDbContext.SaveChanges();
         }
 
         public void Delete(CalendarEvent entity)
         {
-            Deserialize();
             var eventToDelete = FindById(entity.Id);
-            eventList.Remove(eventToDelete);
+            _calendarDbContext.CalendarEvents.Remove(eventToDelete);
         }
 
         public CalendarEvent FindById(string Id)
         {
-            Deserialize();
-            return eventList.First(x => x.Id == Id);
+            return List.First(x => x.Id == Id);
         }
 
         public void Update(CalendarEvent entity)
         {
-            CalendarEvent eventToUpdate = FindById(entity.Id);
-            eventToUpdate = entity;
-            Serialize(eventList);
-        }
-
-        private void Deserialize()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(path,
-                                      FileMode.Open,
-                                      FileAccess.Read,
-                                      FileShare.Read);
-            eventList = (List<CalendarEvent>)formatter.Deserialize(stream);
-            stream.Close();
-        }
-
-        private void Serialize(Object obj)
-        {
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(path,
-                                     FileMode.Create,
-                                     FileAccess.Write, FileShare.None);
-            formatter.Serialize(stream, obj);
-            stream.Close();
-        }
-
-
+            _calendarDbContext.CalendarEvents.AddOrUpdate(entity);
+        }        
     }
 }

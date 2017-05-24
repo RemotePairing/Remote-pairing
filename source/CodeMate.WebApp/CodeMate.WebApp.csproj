@@ -175,6 +175,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\CalendarContextInitializer.cs" />
+    <Compile Include="DAL\CalendarDbContext.cs" />
     <Compile Include="DataAccess\IEntity.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -376,7 +378,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
