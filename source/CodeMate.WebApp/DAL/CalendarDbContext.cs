@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CodeMate.WebApp.DAL
+﻿namespace CodeMate.WebApp.DAL
 {
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
@@ -13,7 +8,6 @@ namespace CodeMate.WebApp.DAL
     {
         public CalendarDbContext() : base("defaultConnection")
         {
-            
         }
 
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
@@ -22,7 +16,5 @@ namespace CodeMate.WebApp.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
-
     }
 }

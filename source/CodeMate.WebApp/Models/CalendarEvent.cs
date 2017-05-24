@@ -1,11 +1,8 @@
-﻿using CodeMate.WebApp.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CodeMate.WebApp.Models
+﻿namespace CodeMate.WebApp.Models
 {
+    using System;
+    using DataAccess;
+
     [Serializable]
     public class CalendarEvent : IEntity
     {

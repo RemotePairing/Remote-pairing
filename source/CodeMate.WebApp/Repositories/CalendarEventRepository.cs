@@ -1,21 +1,14 @@
-﻿using CodeMate.WebApp.DataAccess;
-using CodeMate.WebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Web;
-
-namespace CodeMate.WebApp.Repositories
+﻿namespace CodeMate.WebApp.Repositories
 {
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
+    using System.Linq;
+    using DataAccess;
     using DAL;
+    using Models;
 
     public class CalendarEventRepository : IRepository<CalendarEvent>
     {
-        private readonly string path = @"C:\temp\db.txt";
         private readonly CalendarDbContext _calendarDbContext;
 
         public CalendarEventRepository()
@@ -35,6 +28,7 @@ namespace CodeMate.WebApp.Repositories
         {
             var eventToDelete = FindById(entity.Id);
             _calendarDbContext.CalendarEvents.Remove(eventToDelete);
+            _calendarDbContext.SaveChanges();
         }
 
         public CalendarEvent FindById(string Id)
@@ -45,6 +39,7 @@ namespace CodeMate.WebApp.Repositories
         public void Update(CalendarEvent entity)
         {
             _calendarDbContext.CalendarEvents.AddOrUpdate(entity);
-        }        
+            _calendarDbContext.SaveChanges();
+        }
     }
 }

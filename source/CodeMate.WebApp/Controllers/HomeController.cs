@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace CodeMate.WebApp.Controllers
+﻿namespace CodeMate.WebApp.Controllers
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Web.Mvc;
     using Models;
     using Repositories;
-    using System.Globalization;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
 
     public class HomeController : Controller
     {
         private Random r = new Random();
-        private CalendarEventRepository calendarEventRepo = new CalendarEventRepository(); 
+        private CalendarEventRepository calendarEventRepo = new CalendarEventRepository();
 
         public ActionResult Index()
         {

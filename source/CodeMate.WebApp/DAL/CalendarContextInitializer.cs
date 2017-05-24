@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CodeMate.WebApp.DAL
+﻿namespace CodeMate.WebApp.DAL
 {
+    using System;
+    using System.Data.Entity;
     using Models;
 
-    public class CalendarContextInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CalendarDbContext>
+    public class CalendarContextInitializer : DropCreateDatabaseIfModelChanges<CalendarDbContext>
     {
         protected override void Seed(CalendarDbContext context)
         {

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CodeMate.WebApp.DataAccess
+﻿namespace CodeMate.WebApp.DataAccess
 {
+    using System.Collections.Generic;
+
     public interface IRepository<T> where T : IEntity
     {
         void Add(T entity);

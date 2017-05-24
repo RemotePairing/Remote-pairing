@@ -58,7 +58,7 @@
                 //    $eventTime.val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
                 //    ShowEventPopup();
                 //},
-                select: function (start, end, jsEvent, view) {
+                select: function(start, end, jsEvent, view) {
                     $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
                     $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:MM'));
                     ShowEventPopup();
@@ -90,11 +90,10 @@
                     type: 'POST',
                     url: "/Home/AddEvent",
                     data: data,
-                    success: function (response) {
+                    success: function(response) {
                         if (response == 'True') {
                             $('#calendar').fullCalendar('refetchEvents');
-                        }
-                        else {
+                        } else {
                             alert('Error, could not save event!');
                         }
                     }
@@ -113,20 +112,22 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     <h4 class="modal-title"></h4>
                 </div>
                 <div class="modal-body">
                     <form id="EventForm" class="well">
                         <input type="hidden" id="eventID">
                         <label>Event title</label>
-                        <input type="text" id="eventTitle" placeholder="Title here"><br />
+                        <input type="text" id="eventTitle" placeholder="Title here"><br/>
                         <label>Scheduled date</label>
-                        <input type="text" id="eventDate"><br />
+                        <input type="text" id="eventDate"><br/>
                         <label>Scheduled time</label>
-                        <input type="text" id="eventTime"><br />
+                        <input type="text" id="eventTime"><br/>
                         <label>Appointment length (minutes)</label>
-                        <input type="text" id="eventDuration" value="30"><br />
+                        <input type="text" id="eventDuration" value="30"><br/>
                     </form>
                 </div>
                 <div class="modal-footer">

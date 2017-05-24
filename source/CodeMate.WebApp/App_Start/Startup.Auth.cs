@@ -1,7 +1,6 @@
 ﻿namespace CodeMate.WebApp
 {
     using System;
-    using System.Collections.Generic;
     using System.Configuration;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -61,7 +60,7 @@
             githubOptions.Scope.Clear();
             githubOptions.Scope.Add("user:email");
 
-            app.UseGitHubAuthentication("a","a");
+            app.UseGitHubAuthentication(githubOptions);
         }
 
         public string GetSetting(string settingId)
