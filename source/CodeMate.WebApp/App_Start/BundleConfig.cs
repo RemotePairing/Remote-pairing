@@ -1,6 +1,25 @@
 ﻿namespace CodeMate.WebApp
 {
     using System.Web.Optimization;
+    using System.Collections.Generic;
+
+    class NonOrderingBundleOrderer : IBundleOrderer
+    {
+        public IEnumerable<BundleFile> OrderFiles(BundleContext context, IEnumerable<BundleFile> files)
+        {
+            return files;
+        }
+    }
+
+
+    static class BundleExtentions
+    {
+        public static Bundle PreserveOrder(this Bundle bundle)
+        {
+            bundle.Orderer = new NonOrderingBundleOrderer();
+            return bundle;
+        }
+    }
 
     public class BundleConfig
     {
@@ -22,9 +41,23 @@
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").PreserveOrder().Include(
+                "~/Scripts/fullcalendar/moment.min.js",
+                "~/Scripts/fullcalendar/jquery-ui.custom.min.js",
+                "~/Scripts/fullcalendar/fullcalendar.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/fullcalendar").Include(
+                "~/Content/fullcalendar.css",
+                "~/Content/themes/base/jquery-ui.min.css",
+                "~/Content/themes/smoothness/jquery-ui.min.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));
+
+            // Page-specific bundles
+            bundles.Add(new ScriptBundle("~/bundles/homepage").Include(
+                "~/Scripts/homepage.js"));
         }
     }
 }
