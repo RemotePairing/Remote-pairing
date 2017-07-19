@@ -3,14 +3,17 @@
     using System;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
     using System.Web.Mvc;
     using Models;
     using Repositories;
+    using SampleLib.Utils;
 
     public class HomeController : Controller
     {
         private Random r = new Random();
-        private CalendarEventRepository calendarEventRepo = new CalendarEventRepository();
+        private readonly CalendarEventRepository _calendarEventRepo = new CalendarEventRepository();
+        readonly DateTime _linkTimeLocal = Assembly.GetExecutingAssembly().GetLinkerTime();
 
         public ActionResult Index()
         {
@@ -19,7 +22,7 @@
 
         public ActionResult GetEvents(DateTime start, DateTime end)
         {
-            var rows = calendarEventRepo.List.ToArray();
+            var rows = _calendarEventRepo.List.ToArray();
             return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
@@ -38,7 +41,7 @@
                 AllDay = false
             };
 
-            calendarEventRepo.Add(newCalendarEvent);
+            _calendarEventRepo.Add(newCalendarEvent);
 
             return true;
         }
@@ -51,8 +54,7 @@
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.Message = $"Application build on: {_linkTimeLocal.ToLongTimeString()} {_linkTimeLocal.ToLongDateString()}";
             return View();
         }
 
