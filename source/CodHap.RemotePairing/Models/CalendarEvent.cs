@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp.Models
+﻿namespace CodHap.RemotePairing.Models
 {
     using System;
     using DataAccess;

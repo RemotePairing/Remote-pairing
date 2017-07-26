@@ -1,7 +1,7 @@
-﻿namespace CodeMate.WebApp
+﻿namespace CodHap.RemotePairing
 {
-    using System.Web.Optimization;
     using System.Collections.Generic;
+    using System.Web.Optimization;
 
     class NonOrderingBundleOrderer : IBundleOrderer
     {

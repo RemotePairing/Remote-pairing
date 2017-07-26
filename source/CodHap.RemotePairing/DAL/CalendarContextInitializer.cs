@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp.DAL
+﻿namespace CodHap.RemotePairing.DAL
 {
     using System;
     using System.Data.Entity;

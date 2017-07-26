@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp
+﻿namespace CodHap.RemotePairing
 {
     using System;
     using System.Configuration;

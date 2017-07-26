@@ -1,5 +1,6 @@
-﻿namespace CodeMate.SampleLib.Tests
+﻿namespace CodHap.SampleLib.Tests
 {
+    using SampleLib;
     using Xunit;
 
     public class MultiplierTest

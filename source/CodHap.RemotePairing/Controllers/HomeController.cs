@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp.Controllers
+﻿namespace CodHap.RemotePairing.Controllers
 {
     using System;
     using System.Globalization;

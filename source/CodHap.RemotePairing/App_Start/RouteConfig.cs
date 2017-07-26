@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp
+﻿namespace CodHap.RemotePairing
 {
     using System.Web.Mvc;
     using System.Web.Routing;

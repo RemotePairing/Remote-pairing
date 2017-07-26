@@ -1,4 +1,4 @@
-﻿namespace CodeMate.SampleLib
+﻿namespace CodHap.SampleLib
 {
     public class Multiplier
     {

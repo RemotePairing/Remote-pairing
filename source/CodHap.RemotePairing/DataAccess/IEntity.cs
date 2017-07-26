@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp.DataAccess
+﻿namespace CodHap.RemotePairing.DataAccess
 {
     using System;
 

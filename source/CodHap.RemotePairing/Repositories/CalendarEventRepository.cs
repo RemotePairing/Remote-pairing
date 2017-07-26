@@ -1,4 +1,4 @@
-﻿namespace CodeMate.WebApp.Repositories
+﻿namespace CodHap.RemotePairing.Repositories
 {
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;

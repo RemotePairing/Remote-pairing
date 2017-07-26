@@ -1,9 +1,9 @@
-﻿using CodeMate.WebApp;
+﻿using CodHap.RemotePairing;
 using Microsoft.Owin;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace CodeMate.WebApp
+namespace CodHap.RemotePairing
 {
     using Owin;
 
