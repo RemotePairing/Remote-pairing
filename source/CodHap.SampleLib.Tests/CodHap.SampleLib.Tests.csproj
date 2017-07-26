@@ -8,8 +8,8 @@
     <ProjectGuid>{D76101DD-5EE1-4C28-841D-D17FC8E34B1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeMate.SampleLib.Tests</RootNamespace>
-    <AssemblyName>CodeMate.SampleLib.Tests</AssemblyName>
+    <RootNamespace>CodHap.SampleLib.Tests</RootNamespace>
+    <AssemblyName>CodHap.SampleLib.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeMate.SampleLib\CodeMate.SampleLib.csproj">
+    <ProjectReference Include="..\CodHap.SampleLib\CodHap.SampleLib.csproj">
       <Project>{BD7F9971-3C01-4814-8F7E-2ECF50F04D61}</Project>
-      <Name>CodeMate.SampleLib</Name>
+      <Name>CodHap.SampleLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

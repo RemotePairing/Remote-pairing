@@ -7,8 +7,8 @@
     <ProjectGuid>{BD7F9971-3C01-4814-8F7E-2ECF50F04D61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeMate.SampleLib</RootNamespace>
-    <AssemblyName>CodeMate.SampleLib</AssemblyName>
+    <RootNamespace>CodHap.SampleLib</RootNamespace>
+    <AssemblyName>CodHap.SampleLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

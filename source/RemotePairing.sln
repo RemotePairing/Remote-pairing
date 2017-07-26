@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMate.SampleLib", "CodeMate.SampleLib\CodeMate.SampleLib.csproj", "{BD7F9971-3C01-4814-8F7E-2ECF50F04D61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodHap.SampleLib", "CodHap.SampleLib\CodHap.SampleLib.csproj", "{BD7F9971-3C01-4814-8F7E-2ECF50F04D61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMate.SampleLib.Tests", "CodeMate.SampleLib.Tests\CodeMate.SampleLib.Tests.csproj", "{D76101DD-5EE1-4C28-841D-D17FC8E34B1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodHap.SampleLib.Tests", "CodHap.SampleLib.Tests\CodHap.SampleLib.Tests.csproj", "{D76101DD-5EE1-4C28-841D-D17FC8E34B1F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D1610D0D-043E-4CF9-B7D8-9ABBE59E8868}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3302FBA2-5F11-4EA6-9FFD-B93ECDB2E1A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeMate.WebApp", "CodeMate.WebApp\CodeMate.WebApp.csproj", "{8D7FC575-6956-4036-B3D9-75BED6B39EFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodHap.RemotePairing", "CodHap.RemotePairing\CodHap.RemotePairing.csproj", "{8D7FC575-6956-4036-B3D9-75BED6B39EFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
