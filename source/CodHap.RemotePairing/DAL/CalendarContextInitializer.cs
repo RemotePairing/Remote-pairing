@@ -13,7 +13,7 @@
                 title = "Event initialized from DB",
                 Id = "1",
                 start = DateTime.UtcNow.ToString(),
-                end = DateTime.UtcNow.AddMinutes(45).ToString()
+                end = DateTime.UtcNow.AddMinutes(30).ToString()
             };
 
             context.CalendarEvents.Add(calendarEvent);
