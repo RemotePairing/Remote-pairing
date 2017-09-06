@@ -6,10 +6,10 @@
     [Serializable]
     public class CalendarEvent : IEntity
     {
-        public string Title { get; set; }
-        public string Start { get; set; }
-        public string End { get; set; }
-        public string Duration { get; set; }
-        public bool AllDay { get; set; }
+        public string title { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
+        public string duration { get; set; }
+        public bool allDay { get; set; }
     }
 }

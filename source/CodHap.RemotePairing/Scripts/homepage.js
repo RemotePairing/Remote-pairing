@@ -27,9 +27,11 @@
             alert('You clicked on event id: ' +
                 calEvent.Id +
                 "\nStart: " +
-                calEvent.Start +
-                "\nAnd the title is: " +
-                calEvent.Title);
+                calEvent.start.format('DD-MM-YYYY HH:mm') +
+                "\nEnd: " +
+                calEvent.end.format('DD-MM-YYYY HH:mm') +
+                "\nTitle: " +
+                calEvent.title);
         },
         //dayClick: function(date, jsEvent, view) {
         //    $eventDate.val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));

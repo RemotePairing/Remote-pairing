@@ -33,12 +33,12 @@
 
             var newCalendarEvent = new CalendarEvent
             {
-                //Id = r.Next(10000).ToString(),
-                Title = name,
-                Start = dt.ToString("s"),
-                End = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
-                Duration = duration,
-                AllDay = false
+                Id = r.Next(10000).ToString(),
+                title = name,
+                start = dt.ToString("s"),
+                end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
+                duration = duration,
+                allDay = false
             };
 
             _calendarEventRepo.Add(newCalendarEvent);
