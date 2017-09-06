@@ -38,7 +38,7 @@
         //},
         select: function (start, end, jsEvent, view) {
             $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
-            $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:MM'));
+            $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:mm'));
             ShowEventPopup();
         }
     });

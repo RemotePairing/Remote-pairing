@@ -10,10 +10,10 @@
         {
             var calendarEvent = new CalendarEvent()
             {
-                title = "Event initialized from DB",
+                Title = "Event initialized from DB",
                 Id = "1",
-                start = DateTime.UtcNow.ToString(),
-                end = DateTime.UtcNow.AddMinutes(45).ToString()
+                Start = DateTime.UtcNow.ToString(),
+                End = DateTime.UtcNow.AddMinutes(45).ToString()
             };
 
             context.CalendarEvents.Add(calendarEvent);

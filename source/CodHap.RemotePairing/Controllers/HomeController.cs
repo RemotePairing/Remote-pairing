@@ -33,11 +33,11 @@
 
             var newCalendarEvent = new CalendarEvent
             {
-                Id = r.Next(10000).ToString(),
-                title = name,
-                start = dt.ToString("s"),
-                end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
-                duration = duration,
+                //Id = r.Next(10000).ToString(),
+                Title = name,
+                Start = dt.ToString("s"),
+                End = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
+                Duration = duration,
                 AllDay = false
             };
 
@@ -48,7 +48,8 @@
 
         private DateTime ParseDateAndTime(string date, string time)
         {
-            var res = DateTime.ParseExact(date + " " + time, "dd-mm-yyyy HH:MM", CultureInfo.InvariantCulture);
+            DateTime res;
+            res = DateTime.ParseExact(date + " " + time, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
             return res;
         }
 
