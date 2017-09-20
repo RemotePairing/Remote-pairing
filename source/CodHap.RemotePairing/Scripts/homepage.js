@@ -41,6 +41,7 @@
         select: function (start, end, jsEvent, view) {
             $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
             $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:mm'));
+            $eventDuration.val(end.diff(start, 'minutes'));
             ShowEventPopup();
         }
     });
@@ -77,7 +78,8 @@
                     alert('Error, could not save event!');
                 }
             }
-        });
+        });        
         $modal.modal('hide');
+        ClearPopupFormValues();
     });
 });
