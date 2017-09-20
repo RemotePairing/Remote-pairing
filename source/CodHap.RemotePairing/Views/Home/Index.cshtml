@@ -10,7 +10,7 @@
 <div class="container">
     <div id="calendar"></div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,6 +35,32 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="saveDate">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="onClickCalEventModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>
+                        <label>Title</label>
+                        <label class="label label-primary" id="modalDetailsTitle"></label>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <label>Description</label>
+                    <label id="modalDetailsDescription"></label><br/>
+                    
+                    <label>Tags</label>
+                    <label class="label label-default" id="modalDetailsTags"></label>
+                </div>
+                <div class="modal-footer ">
+                    <span class="form-control-static pull-left">
+                        <label>Location</label>
+                        <label class="label label-success" id="modalDetailsLocation"></label>
+                    </span>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

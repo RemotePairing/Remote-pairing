@@ -1,11 +1,17 @@
 ﻿$(document).ready(function () {
-    var $modal = $('#myModal');
+    var $modalInput = $('#addEventModal');
+    var $modalDetails = $('#onClickCalEventModal');
 
     var $eventId = $('#eventID');
     var $eventTitle = $('#eventTitle');
     var $eventDate = $('#eventDate');
     var $eventTime = $('#eventTime');
     var $eventDuration = $('#eventDuration');
+
+    var $mdTitle = $('#modalDetailsTitle');
+    var $mdDescr = $('#modalDetailsDescription');
+    var $mdTags = $('#modalDetailsTags');
+    var $mdLocation = $('#modalDetailsLocation');
 
     $('#calendar').fullCalendar({
         header: {
@@ -24,29 +30,15 @@
         selectable: true,
         slotMinutes: 15,
         eventClick: function (calEvent, jsEvent, view) {
-            alert('You clicked on event id: ' +
-                calEvent.Id +
-                "\nStart: " +
-                calEvent.start.format('DD-MM-YYYY HH:mm') +
-                "\nEnd: " +
-                calEvent.end.format('DD-MM-YYYY HH:mm') +
-                "\nTitle: " +
-                calEvent.title);
+            showDescription(calEvent);       
         },
-        //dayClick: function(date, jsEvent, view) {
-        //    $eventDate.val(moment(date, 'DD.MM.YYYY').format('DD-MM-YYYY'));
-        //    $eventTime.val(moment(date, 'DD.MM.YYYY').format('HH:MM'));
-        //    ShowEventPopup();
-        //},
-        select: function (start, end, jsEvent, view) {
-            $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
-            $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:mm'));
-            $eventDuration.val(end.diff(start, 'minutes'));
-            ShowEventPopup();
+
+        select: function (start, end, jsEvent, view) {            
+            showEventPopup(start, end);
         }
     });
 
-    function ClearPopupFormValues() {
+    function clearPopupFormValues() {
         $eventId.val("");
         $eventTitle.val("");
         $eventDate.val("");
@@ -54,8 +46,20 @@
         $eventDuration.val("");
     }
 
-    function ShowEventPopup() {
-        $modal.modal('show');
+    function showEventPopup(start, end) {
+        $eventDate.val(moment(start, 'DD.MM.YYYY').format('DD-MM-YYYY'));
+        $eventTime.val(moment(start, 'DD.MM.YYYY').format('HH:mm'));
+        $eventDuration.val(end.diff(start, 'minutes'));
+        $modalInput.modal('show');
+    }
+
+    function showDescription(calEvent) {
+        $mdTitle.html(calEvent.title);
+        $mdDescr.html(calEvent.description);
+        $mdLocation.html(calEvent.location);
+        $mdTags.html(calEvent.tags);
+
+        $modalDetails.modal('show');
     }
 
     $('#saveDate').click(function () {
@@ -79,7 +83,7 @@
                 }
             }
         });        
-        $modal.modal('hide');
-        ClearPopupFormValues();
+        $modalInput.modal('hide');
+        clearPopupFormValues();
     });
 });
