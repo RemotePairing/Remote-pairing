@@ -6,7 +6,6 @@
     @Scripts.Render("~/bundles/homepage")
 }
 
-
 <div class="container">
     <div id="calendar"></div>
 
@@ -52,15 +51,16 @@
                 <div class="modal-body">
                     <label>Description</label>
                     <label id="modalDetailsDescription"></label><br/>
-                    
+
                     <label>Tags</label>
                     <label class="label label-default" id="modalDetailsTags"></label>
+
+                    <label>Location</label>
+                    <label class="label label-success" id="modalDetailsLocation"></label>
                 </div>
                 <div class="modal-footer ">
-                    <span class="form-control-static pull-left">
-                        <label>Location</label>
-                        <label class="label label-success" id="modalDetailsLocation"></label>
-                    </span>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="showDetails">Details</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

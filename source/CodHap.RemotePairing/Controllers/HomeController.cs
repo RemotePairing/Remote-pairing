@@ -33,7 +33,7 @@
 
             var newCalendarEvent = new CalendarEvent
             {
-                Id = r.Next(10000).ToString(),
+                Id = Guid.NewGuid().ToString(),
                 title = name,
                 start = dt.ToString("s"),
                 end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),

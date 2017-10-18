@@ -8,6 +8,7 @@
     var $eventTime = $('#eventTime');
     var $eventDuration = $('#eventDuration');
 
+    var mdEventId="";
     var $mdTitle = $('#modalDetailsTitle');
     var $mdDescr = $('#modalDetailsDescription');
     var $mdTags = $('#modalDetailsTags');
@@ -54,11 +55,11 @@
     }
 
     function showDescription(calEvent) {
+        mdEventId = calEvent.Id;
         $mdTitle.html(calEvent.title);
         $mdDescr.html(calEvent.description);
         $mdLocation.html(calEvent.location);
         $mdTags.html(calEvent.tags);
-
         $modalDetails.modal('show');
     }
 
@@ -85,5 +86,9 @@
         });        
         $modalInput.modal('hide');
         clearPopupFormValues();
+    });
+
+    $('#showDetails').click(function () {
+        window.location = "/RpEvent/Details/" + mdEventId;
     });
 });

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RpEventController.cs" />
     <Compile Include="DAL\CalendarContextInitializer.cs" />
     <Compile Include="DAL\CalendarDbContext.cs" />
     <Compile Include="DataAccess\IEntity.cs" />
@@ -425,6 +426,7 @@
     <Content Include="Views\Debug\Details.cshtml" />
     <Content Include="Views\Debug\Edit.cshtml" />
     <Content Include="Views\Debug\Index.cshtml" />
+    <Content Include="Views\RpEvent\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

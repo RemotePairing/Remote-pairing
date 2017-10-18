@@ -5,19 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Remote pairing event details</h2>
 
 <div>
-    <h4>CalendarEvent</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.title)
         </dt>
@@ -57,10 +49,20 @@
         <dd>
             @Html.DisplayFor(model => model.allDay)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.tags)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tags)
+        </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
