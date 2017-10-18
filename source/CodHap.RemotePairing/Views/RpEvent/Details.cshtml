@@ -8,7 +8,11 @@
 <h2>Remote pairing event details</h2>
 
 <div>
-    <hr />
+    @if (Request.UrlReferrer != null)
+    {
+        <a class="navbar-btn" onclick="history.go(-1); return false;" href="#">Back</a><br />
+    }
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.title)
