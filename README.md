@@ -3,7 +3,9 @@ ASP.NET MVC project - it is meant to bring functionality of pairing programmers 
 
 To build the project correctly add Secret.config file at the root folder of the project and fill it with GitHub ClientID and SecretID. Sample:
 
+```xml
 <appSettings>
 	<add key="GitHubClientId" value="5d5d5d5d5d5d5d" />
 	<add key="GitHubSecretId" value="c4c4c4c4c4c4c4c4c4c" />
 </appSettings>
+```
