@@ -53,7 +53,7 @@
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap-sandstone.css",
-                "~/Content/site.css"));
+                "~/Content/Site.css"));
 
             // Page-specific bundles
             bundles.Add(new ScriptBundle("~/bundles/homepage").Include(
