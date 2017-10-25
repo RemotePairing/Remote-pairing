@@ -21,3 +21,34 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.modal-title {
+    font-weight: bold;
+    font-size: 200%;
+}
+
+.modal-body {
+    display: static;
+}
+
+.modal-body, .modal-body > form {
+    overflow: hidden;
+}
+
+.modal-body form label, .modal-body form input {
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    width: 40%;
+    height: 30px;
+    line-height: 30px;
+    margin: 5px 0;
+}
+
+.modal-body form input {
+    float: right;
+    width: 60%;
+    max-width: 100%;
+    border: 1px solid #CCC;
+}
+
