@@ -8,6 +8,6 @@
         void Delete(T entity);
         void Update(T entity);
         IEnumerable<T> List { get; }
-        T FindById(string Id);
+        T FindById(string id);
     }
 }

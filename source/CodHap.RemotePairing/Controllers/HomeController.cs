@@ -6,14 +6,23 @@
     using System.Reflection;
     using System.Web.Mvc;
     using Models;
-    using Repositories;
     using SampleLib.Utils;
 
     public class HomeController : Controller
     {
-        private Random r = new Random();
-        private readonly CalendarEventRepository _calendarEventRepo = new CalendarEventRepository();
         readonly DateTime _linkTimeLocal = Assembly.GetExecutingAssembly().GetLinkerTime();
+
+        private ApplicationDbContext _context;
+
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
 
         public ActionResult Index()
         {
@@ -22,7 +31,7 @@
 
         public ActionResult GetEvents(DateTime start, DateTime end)
         {
-            var rows = _calendarEventRepo.List.ToArray();
+            var rows = _context.CalendarEvents.ToList();
             return Json(rows, JsonRequestBehavior.AllowGet);
         }
 
@@ -33,7 +42,6 @@
 
             var newCalendarEvent = new CalendarEvent
             {
-                Id = Guid.NewGuid().ToString(),
                 title = name,
                 start = dt.ToString("s"),
                 end = dt.AddMinutes(Convert.ToInt32(duration)).ToString("s"),
@@ -41,21 +49,21 @@
                 allDay = false
             };
 
-            _calendarEventRepo.Add(newCalendarEvent);
-
+            _context.CalendarEvents.Add(newCalendarEvent);
+            _context.SaveChanges();
             return true;
         }
 
         private DateTime ParseDateAndTime(string date, string time)
         {
-            DateTime res;
-            res = DateTime.ParseExact(date + " " + time, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
+            var res = DateTime.ParseExact(date + " " + time, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture);
             return res;
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = $"Application build on: {_linkTimeLocal.ToLongTimeString()} {_linkTimeLocal.ToLongDateString()}";
+            ViewBag.Message =
+                $"Application build on: {_linkTimeLocal.ToLongTimeString()} {_linkTimeLocal.ToLongDateString()}";
             return View();
         }
 

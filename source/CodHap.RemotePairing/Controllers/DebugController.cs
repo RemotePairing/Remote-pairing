@@ -6,19 +6,22 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using CodHap.RemotePairing.DAL;
 using CodHap.RemotePairing.Models;
 
 namespace CodHap.RemotePairing.Controllers
 {
     public class DebugController : Controller
     {
-        private CalendarDbContext db = new CalendarDbContext();
+        private ApplicationDbContext _context;
+        public DebugController()
+        {
+            _context = new ApplicationDbContext();
+        }
 
         // GET: Debug
         public ActionResult Index()
         {
-            return View(db.CalendarEvents.ToList());
+            return View(_context.CalendarEvents.ToList());
         }
 
         // GET: Debug/Details/5
@@ -28,7 +31,7 @@ namespace CodHap.RemotePairing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CalendarEvent calendarEvent = db.CalendarEvents.Find(id);
+            CalendarEvent calendarEvent = _context.CalendarEvents.Find(id);
             if (calendarEvent == null)
             {
                 return HttpNotFound();
@@ -51,8 +54,8 @@ namespace CodHap.RemotePairing.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CalendarEvents.Add(calendarEvent);
-                db.SaveChanges();
+                _context.CalendarEvents.Add(calendarEvent);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +69,7 @@ namespace CodHap.RemotePairing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CalendarEvent calendarEvent = db.CalendarEvents.Find(id);
+            CalendarEvent calendarEvent = _context.CalendarEvents.Find(id);
             if (calendarEvent == null)
             {
                 return HttpNotFound();
@@ -83,8 +86,8 @@ namespace CodHap.RemotePairing.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(calendarEvent).State = EntityState.Modified;
-                db.SaveChanges();
+                _context.Entry(calendarEvent).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(calendarEvent);
@@ -97,7 +100,7 @@ namespace CodHap.RemotePairing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CalendarEvent calendarEvent = db.CalendarEvents.Find(id);
+            CalendarEvent calendarEvent = _context.CalendarEvents.Find(id);
             if (calendarEvent == null)
             {
                 return HttpNotFound();
@@ -110,9 +113,9 @@ namespace CodHap.RemotePairing.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            CalendarEvent calendarEvent = db.CalendarEvents.Find(id);
-            db.CalendarEvents.Remove(calendarEvent);
-            db.SaveChanges();
+            CalendarEvent calendarEvent = _context.CalendarEvents.Find(id);
+            _context.CalendarEvents.Remove(calendarEvent);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +123,7 @@ namespace CodHap.RemotePairing.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
         }
