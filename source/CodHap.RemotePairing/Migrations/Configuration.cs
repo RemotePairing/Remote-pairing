@@ -9,7 +9,7 @@ namespace CodHap.RemotePairing.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(CodHap.RemotePairing.Models.ApplicationDbContext context)
