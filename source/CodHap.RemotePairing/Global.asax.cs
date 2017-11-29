@@ -1,10 +1,12 @@
 ﻿namespace CodHap.RemotePairing
 {
     using System.Data.Entity;
+    using System.Data.Entity.Migrations;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Migrations;
     using Models;
 
     public class MvcApplication : HttpApplication
@@ -16,8 +18,14 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, CodHap.RemotePairing.Migrations.Configuration>());
+            UpdateDatabaseMigrations();
+        }
 
+        private void UpdateDatabaseMigrations()
+        {
+            var config = new Configuration();
+            var migrator = new DbMigrator(config);
+            migrator.Update();
         }
     }
 }
