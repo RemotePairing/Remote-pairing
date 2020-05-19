@@ -21,7 +21,8 @@ namespace CodHap.RemotePairing
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //https://docs.microsoft.com/pl-pl/aspnet/core/fundamentals/routing?view=aspnetcore-3.1
+            //https://aregcode.com/blog/2019/dotnetcore-understanding-aspnet-endpoint-routing/
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
